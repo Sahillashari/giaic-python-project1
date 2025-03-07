@@ -37,7 +37,10 @@ if uploaded_files:
                 continue
 
             st.subheader(f"📄 Data Preview: {file.name}")
-            st.dataframe(df.head())
+            st.write("### 🔍 Data Snapshot:")
+            st.dataframe(df.head())  # Show first 5 rows
+            st.write("### 🏷 Column Data Types:")
+            st.write(df.dtypes)  # Show data types of columns
 
             # Data Cleaning
             st.subheader("🛠️ Data Cleaning Options")
@@ -67,7 +70,7 @@ if uploaded_files:
             if st.checkbox(f"📈 Show Visualization for {file.name}"):
                 numeric_cols = df.select_dtypes(include='number')
                 if not numeric_cols.empty:
-                    st.bar_chart(numeric_cols.iloc[:, :2])
+                    st.bar_chart(numeric_cols.iloc[:, :2])  # Plot only first 2 numeric columns
                 else:
                     st.warning(f"⚠️ No numeric data found in {file.name}")
 
